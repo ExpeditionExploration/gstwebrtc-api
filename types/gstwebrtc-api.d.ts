@@ -5,7 +5,7 @@ declare class GstWebRTCAPI {
     unregisterConnectionListener(listener: ConnectionListener): boolean;
     unregisterAllConnectionListeners(): void;
     createProducerSession(stream: MediaStream): ProducerSession;
-    getAvailableProducers(): any[];
+    getAvailableProducers(): Producer[];
     registerProducersListener(listener: ProducersListener): boolean;
     unregisterProducersListener(listener: ProducersListener): boolean;
     unregisterAllProducersListeners(): void;
@@ -18,17 +18,15 @@ declare namespace GstWebRTCAPI {
 import type ProducerSession from "./producer-session.js";
 import type ConsumerSession from "./consumer-session.js";
 import SessionState from "./session-state.js";
-
-/* Added manually */
-interface ConnectionListener {
+export interface ConnectionListener {
     connected(clientId: string): void;
     disconnected(): void;
 }
-interface ProducersListener {
+export interface ProducersListener {
     producerAdded(producer: Producer): void;
     producerRemoved(producer: Producer): void;
 }
-type Producer = {
+export type Producer = {
     readonly id: string;
     readonly meta: Record<string, unknown>;
 };
